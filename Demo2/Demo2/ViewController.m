@@ -7,6 +7,7 @@
 
 #import "ViewController.h"
 #import "GlobalConfig.h"
+#import "Demo2-Swift.h"
 /* 字符串混淆解密函数，将char[] 形式字符数组和 aa异或运算揭秘 */
 extern char* decryptConfusionCS(char* string)
 {
@@ -69,6 +70,9 @@ extern NSString* decryptConstString(char* string)
 //    NSLog(@"%s",cStr);
     NSString * host = HOST ;
     NSLog(@"host地址: %@",host);
+    NSString * sh =  [GlobalConfig_swift getHost];
+                               
+    NSLog(@"s %@",sh);
     
 }
 @end

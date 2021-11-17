@@ -15,6 +15,9 @@
 		675DEE082733C1A70081E192 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 675DEE062733C1A70081E192 /* LaunchScreen.storyboard */; };
 		675DEE0B2733C1A70081E192 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 675DEE0A2733C1A70081E192 /* main.m */; };
 		67A892412744D814008E424A /* ConfigShell.sh in Resources */ = {isa = PBXBuildFile; fileRef = 67A892402744D814008E424A /* ConfigShell.sh */; };
+		67A8924A2744F8DE008E424A /* GlobalConfig_swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A892492744F8DE008E424A /* GlobalConfig_swift.swift */; };
+		67A8924D2744F8FF008E424A /* JenkinsConfig_swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A8924C2744F8FF008E424A /* JenkinsConfig_swift.swift */; };
+		67A892562744FAC0008E424A /* ConfigShell_swift.sh in Resources */ = {isa = PBXBuildFile; fileRef = 67A892552744FAC0008E424A /* ConfigShell_swift.sh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +36,10 @@
 		67A8923E2744D7D8008E424A /* JenkinsConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JenkinsConfig.h; sourceTree = "<group>"; };
 		67A8923F2744D7F5008E424A /* GlobalConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalConfig.h; sourceTree = "<group>"; };
 		67A892402744D814008E424A /* ConfigShell.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ConfigShell.sh; sourceTree = "<group>"; };
+		67A892442744F842008E424A /* Demo2-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Demo2-Bridging-Header.h"; sourceTree = "<group>"; };
+		67A892492744F8DE008E424A /* GlobalConfig_swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConfig_swift.swift; sourceTree = "<group>"; };
+		67A8924C2744F8FF008E424A /* JenkinsConfig_swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JenkinsConfig_swift.swift; sourceTree = "<group>"; };
+		67A892552744FAC0008E424A /* ConfigShell_swift.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ConfigShell_swift.sh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +72,9 @@
 		675DEDF72733C1A50081E192 /* Demo2 */ = {
 			isa = PBXGroup;
 			children = (
+				67A892492744F8DE008E424A /* GlobalConfig_swift.swift */,
+				67A8924C2744F8FF008E424A /* JenkinsConfig_swift.swift */,
+				67A892552744FAC0008E424A /* ConfigShell_swift.sh */,
 				67A8923F2744D7F5008E424A /* GlobalConfig.h */,
 				67A892402744D814008E424A /* ConfigShell.sh */,
 				67A8923E2744D7D8008E424A /* JenkinsConfig.h */,
@@ -79,6 +89,7 @@
 				675DEE062733C1A70081E192 /* LaunchScreen.storyboard */,
 				675DEE092733C1A70081E192 /* Info.plist */,
 				675DEE0A2733C1A70081E192 /* main.m */,
+				67A892442744F842008E424A /* Demo2-Bridging-Header.h */,
 			);
 			path = Demo2;
 			sourceTree = "<group>";
@@ -113,6 +124,7 @@
 				TargetAttributes = {
 					675DEDF42733C1A50081E192 = {
 						CreatedOnToolsVersion = 12.2;
+						LastSwiftMigration = 1220;
 					};
 				};
 			};
@@ -142,6 +154,7 @@
 				675DEE082733C1A70081E192 /* LaunchScreen.storyboard in Resources */,
 				67A892412744D814008E424A /* ConfigShell.sh in Resources */,
 				675DEE052733C1A70081E192 /* Assets.xcassets in Resources */,
+				67A892562744FAC0008E424A /* ConfigShell_swift.sh in Resources */,
 				675DEE032733C1A50081E192 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -153,7 +166,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67A8924D2744F8FF008E424A /* JenkinsConfig_swift.swift in Sources */,
 				675DEE002733C1A50081E192 /* ViewController.m in Sources */,
+				67A8924A2744F8DE008E424A /* GlobalConfig_swift.swift in Sources */,
 				675DEDFA2733C1A50081E192 /* AppDelegate.m in Sources */,
 				675DEE0B2733C1A70081E192 /* main.m in Sources */,
 				675DEDFD2733C1A50081E192 /* SceneDelegate.m in Sources */,
@@ -299,6 +314,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U3T3KTF4KR;
 				INFOPLIST_FILE = Demo2/Info.plist;
@@ -308,6 +324,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ee.Demo2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Demo2/Demo2-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -317,6 +336,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UP6VLBTP22;
 				INFOPLIST_FILE = Demo2/Info.plist;
@@ -326,6 +346,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ee.Demo2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Demo2/Demo2-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
