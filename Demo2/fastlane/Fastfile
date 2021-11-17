@@ -1,0 +1,154 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+def updateProjectBuildNumber
+ 
+currentTime = Time.new.strftime("%Y%m%d")
+build = get_build_number()
+if build.include?"#{currentTime}."
+# => 为当天版本 计算迭代版本号
+lastStr = build[build.length-2..build.length-1]
+lastNum = lastStr.to_i
+lastNum = lastNum + 1
+lastStr = lastNum.to_s
+if lastNum < 10
+lastStr = lastStr.insert(0,"0")
+end
+build = "#{currentTime}.#{lastStr}"
+else
+# => 非当天版本 build 号重置
+build = "#{currentTime}.01"
+end
+puts("*************| 更新build #{build} |*************")
+# => 更改项目 build 号
+increment_build_number(
+build_number: "#{build}"
+)
+end
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Description of what the lane does"
+  
+  lane :sdjdev do
+    increment_build_number
+    # increment_version_number
+    # update_info_plist 
+    # get_build_number
+    # get_version_number
+    build_app(
+
+        scheme: "sdjWallet",   #工程下要打包的项目,如果一个工程有多个项目则用[项目1,项目2]
+
+        configuration: "Release",              # Debug or Release
+
+        clean: true,                           #清空上次打包信息
+
+        export_method:"development",        # app-store, ad-hoc, package, enterprise, 					#development, developer-id
+
+        output_directory: './build',  #指定ipa最后输出的目录
+
+        output_name: "sdjWallet.ipa", 
+
+
+    )
+   #enable_automatic_code_signing(path: "sdjWallet.xcworkspace") //开启自动签名
+  end
+  lane :sdjadhoc do
+    increment_build_number
+    build_app(
+
+        scheme: "sdjWallet",   #工程下要打包的项目,如果一个工程有多个项目则用[项目1,项目2]
+
+        configuration: "Release",              # Debug or Release
+
+        clean: true,                           #清空上次打包信息
+
+        export_method:"ad-hoc",        # app-store, ad-hoc, package, enterprise, 					#development, developer-id
+
+        output_directory: './build',  #指定ipa最后输出的目录
+
+        output_name: "sdjWallet.ipa", 
+
+
+    )
+
+   #enable_automatic_code_signing(path: "sdjWallet.xcworkspace") //开启自动签名
+  end
+
+  #打developement 包，并且上传到蒲公英
+  lane :sdjpgy do |options|
+  updateProjectBuildNumber  #// 这里调用
+  currentTime = Time.new.strftime("%Y-%m-%d-%H-%M")
+  ipaName = "盛迪嘉-#{currentTime}.ipa"
+
+	#increment_build_number
+	# version = get_version_number(
+  # 		xcodeproj: "sdjWallet.xcodeproj",
+  # 		target: "sdjWallet"
+	# )
+	buidlNum = get_build_number()
+  puts("build  num : #{buidlNum} \n")
+  puts("当前版本号: #{get_version_number()}")
+  puts("传参:#{options} \n")
+
+  # "#{options[:desc]}"
+  versionNum = "#{options[:ver]}"
+  if versionNum != nil && versionNum != ""
+    puts "修改后版本号为 #{versionNum}"
+    increment_version_number(
+     version_number: "#{options[:ver]}"
+    )
+  else
+    puts "外部没传ver参数 , 不改变版本号"
+  end
+   
+  # increment_version_number(
+  #   version_number: "#{options[:ver]}"
+  # )
+  # increment_version_number(version_number: options[:version]) 
+  	gym(
+  	  clean:true, #打包前clean项目
+    	export_method: "ad-hoc", #导出方式
+      scheme:"sdjWallet", #scheme
+      configuration: "Debug",#环境
+      output_directory:"./app",#ipa的存放目录
+      output_name:ipaName #get_build_number()#输出ipa的文件名为当前的build号
+  	)
+	  #蒲公英的配置 替换为自己的api_key和user_key
+    defaultDes = "蒲公英描述"
+    inputDesc = "#{options[:desc]}"
+    if inputDesc != nil && inputDesc != "" 
+      defaultDes = inputDesc
+    end
+    
+	  #pgyer(api_key: "ac9e94b36de89bbaee8e0c0d32a4f63f", user_key: "7ed64ee4ef239007fcceff05904e6ca2",update_description: defaultDes)
+   end
+  lane :testFunc do |option| 
+    configuration = option[:configuration]
+    val1 = "#{option[:key1]}"
+    if val1 != nil && val1 != ""
+      puts "val1语言为 #{val1}"
+    else
+      puts "无法得知 x 的值"
+    end
+
+
+    print("desc2 ++","#{option[:key1]}" )
+    print("desc2 ++","#{option[:key2]}" )
+    puts configuration
+  end
+ 
+end
